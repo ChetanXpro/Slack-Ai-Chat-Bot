@@ -47,10 +47,10 @@ rtm.on("ready", async () => {
 });
 
 rtm.on("slack_event", async (eventType, event) => {
-  console.log(event.channel);
+
   if (event?.username !== "Open AI" && event?.type !== "pong") {
     if (event.type !== "user_typing") {
-      if (event?.text) console.log(event?.text);
+      
 
       if (event?.text) {
         rtm.sendTyping(event.channel)
