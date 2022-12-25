@@ -1,6 +1,10 @@
 require("dotenv").config();
 const { RTMClient } = require("@slack/rtm-api");
 const { WebClient } = require("@slack/web-api");
+const express = require('express');
+
+const app = express()
+
 
 const rtm = new RTMClient(process.env.RTM_CLIENT);
 const web = new WebClient(process.env.WEB_CLIENT);
@@ -13,6 +17,7 @@ const openai = new OpenAIApi(configuration);
 
 const generateText = async (slackText) => {
   try {
+    
     if (slackText?.startsWith("#cmd")) {
       const newPrompt = slackText.replace("#cmd", "").trim();
       const response = await openai.createCompletion({
@@ -56,6 +61,7 @@ rtm.on("slack_event", async (eventType, event) => {
         rtm.sendTyping(event.channel)
         const response = await generateText(event?.text);
 
+
         if (response) sendMsg(event.channel, response);
       }
     }
@@ -73,3 +79,8 @@ const sendMsg = async (slackChannel, msg) => {
   //   text:msg
   // })
 };
+
+
+app.listen(5000,()=>{
+  console.log(`Server running on port ${5000}`)
+})
