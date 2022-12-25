@@ -80,12 +80,6 @@ const sendMsg = async (slackChannel, msg) => {
   // })
 };
 
-app.get('/',(req,res)=>{
-  res.json({
-    success:true,
-    message:"API working"
-  })
-})
 
 
 app.listen(5000,()=>{
