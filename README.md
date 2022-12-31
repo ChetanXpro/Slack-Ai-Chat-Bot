@@ -1,5 +1,5 @@
 # Slack-Ai-Chat-Bot
-# Used OpenAI API
+## Used OpenAI API
 
 
 
